@@ -2,3 +2,99 @@
 @import url(../node_modules/quill/dist/quill.bubble.css);
 @import url(../node_modules/quill/dist/quill.core.css);
 @import url(../node_modules/quill/dist/quill.snow.css);
+
+
+
+.ql-toolbar .ql-formats .ql-placeholder::before {
+  content: 'P'; /* or use a background SVG */
+  font-weight: 600;
+  font-family: monospace;
+}
+
+.ql-tooltip .ql-placeholder-form {
+  display: grid;
+  gap: 10px;
+  min-width: 260px;
+}
+
+.ql-tooltip .ql-placeholder-fields {
+  display: grid;
+  gap: 8px;
+}
+
+.ql-tooltip .ql-placeholder-field {
+  display: grid;
+  gap: 4px;
+}
+
+.ql-tooltip .ql-placeholder-input {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Actions row */
+.ql-tooltip .ql-placeholder-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+/* Backdrop */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  z-index: 999;
+}
+
+/* Modal box */
+.modal {
+  position: fixed;
+  z-index: 1000;
+  inset: 50% auto auto 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  color: #111;
+  border-radius: 8px;
+  min-width: 320px;
+  max-width: 90vw;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: 12px;
+  padding: 16px;
+}
+
+.modal-header h2 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.modal-body {
+  display: grid;
+  gap: 10px;
+}
+
+.field {
+  display: grid;
+  gap: 6px;
+}
+
+.field > span {
+  font-size: 12px;
+  color: #555;
+}
+
+.field > input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 6px 8px;
+  border: 1px solid #d0d5dd;
+  border-radius: 4px;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}

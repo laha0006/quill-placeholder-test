@@ -1,0 +1,6 @@
+.ql-toolbar .ql-formats .ql-placeholder::before {
+  content: 'PLACE'; /* or use a background SVG */
+  font-weight: 600;
+  font-family: monospace;
+  background-color: greenyellow;
+}

@@ -1,5 +1,39 @@
 <h1>Quill</h1>
 
-<quill-editor (onEditorCreated)="created($event)"></quill-editor>
+<quill-editor [modules]="modules" theme="snow" (onEditorCreated)="created($event)"></quill-editor>
 <button (click)="addPlaceholder()">Add placeholder</button>
 <button (click)="showDelta()">Show Delta</button>
+
+@if (showPlaceholderModal()) {
+<div class="modal-backdrop"></div>
+<div class="modal" role="dialog" aria-modal="true">
+  <div class="modal-header">
+    <h2>Create placeholder</h2>
+  </div>
+
+  <div class="modal-body">
+    <label class="field">
+      <span>Label</span>
+      <input
+        type="text"
+        [value]="placeholderLabel()"
+        (input)="placeholderLabel.set($event.target.value)"
+      />
+    </label>
+
+    <label class="field">
+      <span>Key</span>
+      <input
+        type="text"
+        [value]="placeholderKey()"
+        (input)="placeholderKey.set($event.target.value)"
+      />
+    </label>
+  </div>
+
+  <div class="modal-actions">
+    <button (click)="submitPlaceholderModal()">Insert</button>
+    <button (click)="cancelPlaceholderModal()">Cancel</button>
+  </div>
+</div>
+}
