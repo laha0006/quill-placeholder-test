@@ -3,6 +3,7 @@
 <quill-editor [modules]="modules" theme="snow" (onEditorCreated)="created($event)"></quill-editor>
 <button (click)="showDelta()">Show Delta</button>
 <button (click)="save()">Save Delta</button>
+<button (click)="load()">Load Delta</button>
 <button (click)="renderTemplate()">Render!</button>
 
 @if (showPlaceholderModal()) {

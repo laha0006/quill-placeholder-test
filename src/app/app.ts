@@ -3,6 +3,7 @@ import { QuillEditorComponent } from 'ngx-quill';
 import { render } from './render';
 import Quill from 'quill';
 import { Delta } from 'quill/core';
+import { setupClickToEnd, setupPlaceholderSelection } from './placeholder';
 
 @Component({
   selector: 'app-root',
@@ -42,6 +43,9 @@ export class App {
   created($event: Quill) {
     this.quillInstance = $event;
     ($event as any).__hostComponent = this;
+    setupPlaceholderSelection(this.quillInstance);
+    setupClickToEnd(this.quillInstance);
+    console.log('tested');
   }
 
   openPlaceholderModal() {
@@ -109,6 +113,11 @@ export class App {
 
   save() {
     this.saveDelta = this.quillInstance?.getContents();
+  }
+
+  load() {
+    if (!this.saveDelta) return;
+    this.quillInstance?.setContents(this.saveDelta);
   }
 
   renderTemplate() {
