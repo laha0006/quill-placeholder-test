@@ -1,6 +1,8 @@
 import { Component, signal } from '@angular/core';
 import { QuillEditorComponent } from 'ngx-quill';
+import { render } from './render';
 import Quill from 'quill';
+import { Delta } from 'quill/core';
 
 @Component({
   selector: 'app-root',
@@ -10,6 +12,7 @@ import Quill from 'quill';
 })
 export class App {
   quillInstance: Quill | null = null;
+  saveDelta?: Delta;
 
   showPlaceholderModal = signal(false);
   placeholderLabel = signal('');
@@ -77,8 +80,7 @@ export class App {
     } else {
       quill.insertEmbed(insertIndex, 'placeholder', { label, key }, 'user');
     }
-    quill.insertText(insertIndex + 1, ' ', 'user');
-    quill.setSelection(insertIndex + 2, 0, 'user');
+    quill.setSelection(insertIndex + 1, 0, 'user');
 
     this.showPlaceholderModal.set(false);
   }
@@ -98,6 +100,23 @@ export class App {
   }
 
   showDelta() {
-    console.log(this.quillInstance?.getContents());
+    const delta = this.quillInstance?.getContents();
+    console.log('normal delta:', delta);
+    if (delta === undefined) return;
+    const renderDelta = render(delta);
+    console.table(renderDelta?.ops);
+  }
+
+  save() {
+    this.saveDelta = this.quillInstance?.getContents();
+  }
+
+  renderTemplate() {
+    const delta = this.quillInstance?.getContents();
+    console.log('normal delta:', delta);
+    if (delta === undefined) return;
+    const renderDelta = render(delta);
+    if (renderDelta === null) return;
+    this.quillInstance?.setContents(renderDelta);
   }
 }
